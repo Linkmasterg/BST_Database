@@ -93,6 +93,23 @@ int main(int argc, char** argv)
 			}
 		}
 
+		else if (user_input_int == 4)
+		{
+			cout << "Please enter the faculty's ID #: ";
+			cin >> user_input_int;
+
+			Faculty temp = Faculty(user_input_int);
+
+			if (masterFaculty.find(temp)->key.get_ID() == -1)
+			{
+				cout << endl;
+			}
+			else
+			{
+				cout << endl << masterFaculty.find(temp)->key << endl;
+			}
+		}
+
 
 
 
