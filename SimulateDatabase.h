@@ -29,6 +29,8 @@ public:
 	void case_4_with_ID(int faculty_ID);
 	void case_5();
 
+	void case_7();
+
 	void case_14();
 
 

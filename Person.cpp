@@ -25,7 +25,6 @@ Person::~Person()
 
 
 
-
 int Person::get_ID() const
 {
 	return (this->ID);

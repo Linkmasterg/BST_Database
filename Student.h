@@ -17,6 +17,8 @@ public:
 
 	Student();
 	Student(int new_ID);
+	Student(string new_name, int new_ID, string new_level, string new_major, double new_GPA, int new_advisor);
+
 	~Student();
 
 	void print_info();

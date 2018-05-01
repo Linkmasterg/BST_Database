@@ -91,6 +91,12 @@ void SimulateDatabase::Run()
 		}
 
 
+		else if (user_input_int == 7)
+		{
+			case_7();
+		}
+
+
 
 		else if (user_input_int == 14)
 		{
@@ -182,4 +188,53 @@ void SimulateDatabase::case_5()
 	}
 }
 
+void SimulateDatabase::case_7()
+{
+	string new_name = "";
+	int new_ID = -1;
+	string new_level = "";
+	string new_major = "";
+	double new_GPA = 0.0;
+	int new_advisor = -1;
+
+	bool duplicates = true;
+
+	cout << "Please enter the following info to add a new student..." << endl;
+	cout << "Student Name: ";
+	cin >> ws;
+	getline(cin, new_name);
+
+	while (duplicates)
+	{
+		cout << "Student ID # [1 - 5000]: ";
+		cin >> new_ID;
+
+		Student temp = Student(new_ID);
+
+		if (masterStudent.contains(temp))
+		{
+			cout << "That student ID # is already in use." << endl;
+		}
+
+		if (!masterStudent.contains(temp))
+		{
+			duplicates = false;
+		}
+	}
+
+	cout << "Student level [Freshman, Sophomore, Junior, Senior]: ";
+	cin >> new_level;
+
+	cout << "Student Major: ";
+	cin >> ws;
+	getline(cin, new_major);
+
+	cout << "Student GPA: ";
+	cin >> new_GPA;
+
+	cout << "Advisor ID #: ";
+	cin >> new_advisor;
+
+	masterStudent.insert(Student(new_name, new_ID, new_level, new_major, new_GPA, new_advisor));
+}
 

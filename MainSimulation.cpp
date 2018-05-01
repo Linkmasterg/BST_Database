@@ -17,7 +17,6 @@ int main(int argc, char** argv)
 	// if they do not exist, create new empty trees
 
 	SimulateDatabase theSimulation = SimulateDatabase();
-
 	theSimulation.Run();
 
 

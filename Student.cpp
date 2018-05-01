@@ -28,6 +28,16 @@ Student::Student(int new_ID)
 	set_ID(new_ID);
 }
 
+Student::Student(string new_name, int new_ID, string new_level, string new_major, double new_GPA, int new_advisor)
+{
+	set_name(new_name);
+	set_ID(new_ID);
+	set_level(new_level);
+	set_subject(new_major);
+	set_GPA(new_GPA);
+	set_advisor(new_advisor);
+}
+
 Student::~Student() 
 {
 
