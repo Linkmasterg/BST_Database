@@ -12,7 +12,7 @@ using namespace std;
 
 Student::Student()
 {
-	set_name("Dr. Null");
+	set_name("Jr. Null");
 	set_ID(rand() % 5001);
 	set_level("Freshman");
 	set_subject("Math");

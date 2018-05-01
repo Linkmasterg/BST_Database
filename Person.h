@@ -43,7 +43,6 @@ private:
 	int ID;
 	string name;
 	string level;
-
 	string subject; // Major for student; department for faculty
 
 

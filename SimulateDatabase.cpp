@@ -7,6 +7,10 @@
 #include "BST.h"
 #include "BST.cpp"
 
+#include "Person.h"
+#include "Student.h"
+#include "Faculty.h"
+
 
 
 
@@ -27,7 +31,10 @@ int main(int argc, char** argv)
 	for (int i = 0; i < 5; ++i)
 	{
 		masterStudent.insert(Student());
+		masterFaculty.insert(Faculty());
 	}
+
+
 
 
 	bool exit_now = false;
@@ -85,6 +92,7 @@ int main(int argc, char** argv)
 				cout << endl << masterStudent.find(temp)->key << endl;
 			}
 		}
+
 
 
 

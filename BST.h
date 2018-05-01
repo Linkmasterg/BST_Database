@@ -10,9 +10,6 @@
 #include "tree_node.h"
 #include "tree_node.cpp"
 
-#include "Person.h"
-#include "Student.h"
-#include "Faculty.h"
 
 using namespace std;
 

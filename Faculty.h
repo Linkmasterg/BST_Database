@@ -1,3 +1,5 @@
+
+
 #ifndef Faculty_H
 #define Faculty_H
 
@@ -8,10 +10,16 @@
 
 #include "Person.h"
 
+#include "BST.h"
+
+
+
 using namespace std;
 
 class Faculty : public Person
 {
+
+public:
 
 
 	Faculty();
@@ -19,6 +27,14 @@ class Faculty : public Person
 	~Faculty();
 
 
+	friend ostream& operator<<(ostream& os, Faculty& f);
+
+
+
+private:
+
+
+	BST<int> advisees;
 
 };
 

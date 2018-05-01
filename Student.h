@@ -34,17 +34,8 @@ public:
 
 private:
 
-	int ID;
-	string name;
-	string level;
-	string subject;
-
 	double GPA;
 	int advisor;
-
-
-
-
 };
 
 
