@@ -15,7 +15,7 @@ using namespace std;
 	Faculty::Faculty()
 	{
 		set_name("DR. NULL");
-		set_ID(5001 + (rand() % 5001));
+		set_ID(5001 + (rand() % 5000));
 		set_level("Professor");
 		set_subject("Mathematics");
 		add_advisee(32546);

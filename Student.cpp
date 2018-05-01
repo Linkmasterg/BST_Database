@@ -17,6 +17,7 @@ Student::Student()
 	set_level("Freshman");
 	set_subject("Math");
 	set_GPA(3.42);
+	set_advisor(9304);
 
 }
 

@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -10,23 +11,25 @@
 #include "Person.h"
 #include "Student.h"
 #include "Faculty.h"
-
-
+#include "SimulateDatabase.h"
 
 
 using namespace std;
 
+SimulateDatabase::SimulateDatabase()
+{
 
-int main(int argc, char** argv)
+}
+
+SimulateDatabase::~SimulateDatabase()
 {
 
 
-	// read in facultyTable and studentTable if they exist into their respective trees,
-	// if they do not exist, create new empty trees
+}
 
 
-	BST<Student> masterStudent = BST<Student>();
-	BST<Faculty> masterFaculty = BST<Faculty>();
+void SimulateDatabase::Run()
+{
 
 	for (int i = 0; i < 5; ++i)
 	{
@@ -35,11 +38,11 @@ int main(int argc, char** argv)
 	}
 
 
+	exit_now = false;
+	user_input_int = -1;
+	user_input_string = "";
 
 
-	bool exit_now = false;
-	int user_input_int = -1;
-	string user_input_string = "";
 
 	while (!exit_now)
 	{
@@ -68,48 +71,24 @@ int main(int argc, char** argv)
 
 		if (user_input_int == 1)
 		{
-			masterStudent.print_tree(masterStudent.get_root());
+			case_1();
 		}
-
 		else if (user_input_int == 2)
 		{
-			masterFaculty.print_tree(masterFaculty.get_root());
+			case_2();
 		}
-
 		else if (user_input_int == 3)
 		{
-			cout << "Please enter the student's ID #: ";
-			cin >> user_input_int;
-
-			Student temp = Student(user_input_int);
-
-			if (masterStudent.find(temp)->key.get_ID() == -1)
-			{
-				cout << endl;
-			}
-			else
-			{
-				cout << endl << masterStudent.find(temp)->key << endl;
-			}
+			case_3();
 		}
-
 		else if (user_input_int == 4)
 		{
-			cout << "Please enter the faculty's ID #: ";
-			cin >> user_input_int;
-
-			Faculty temp = Faculty(user_input_int);
-
-			if (masterFaculty.find(temp)->key.get_ID() == -1)
-			{
-				cout << endl;
-			}
-			else
-			{
-				cout << endl << masterFaculty.find(temp)->key << endl;
-			}
+			case_4();
 		}
-
+		else if (user_input_int == 5)
+		{
+			case_5();
+		}
 
 
 
@@ -118,35 +97,89 @@ int main(int argc, char** argv)
 			exit_now = true;
 		}
 
-	} // END OF Main while loop
 
-
-
-
-
-
-
-
-
-
-
-
-	BST<Person> theBST = BST<Person>();
-
-	for (int i = 0; i < 5; ++i)
-	{
-		theBST.insert(Person());
 	}
 
 
-
-	theBST.print_tree(theBST.get_root());
-
-	
-
-
-
-
-	cout << "ayo" << endl;
-
 }
+
+
+
+
+
+void SimulateDatabase::case_1()
+{
+	masterStudent.print_tree(masterStudent.get_root());
+}
+
+void SimulateDatabase::case_2()
+{
+	masterFaculty.print_tree(masterFaculty.get_root());
+}
+
+void SimulateDatabase::case_3()
+{
+	cout << "Please enter the student's ID #: ";
+	cin >> user_input_int;
+
+	Student temp = Student(user_input_int);
+
+	if (masterStudent.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	else
+	{
+		cout << endl << masterStudent.find(temp)->key << endl;
+	}
+}
+
+void SimulateDatabase::case_4()
+{
+	cout << "Please enter the faculty's ID #: ";
+	cin >> user_input_int;
+
+	Faculty temp = Faculty(user_input_int);
+
+	if (masterFaculty.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	else
+	{
+		cout << endl << masterFaculty.find(temp)->key << endl;
+	}
+}
+
+void SimulateDatabase::case_4_with_ID(int faculty_ID)
+{
+	Faculty temp = Faculty(faculty_ID);
+
+	if (masterFaculty.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	else
+	{
+		cout << endl << masterFaculty.find(temp)->key << endl;
+	}
+}
+
+void SimulateDatabase::case_5()
+{
+	cout << "Please enter the student's ID # to display their advisor's information: ";
+	cin >> user_input_int;
+
+	Student temp = Student(user_input_int);
+
+	if (masterStudent.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	else		
+	{
+		case_4_with_ID(masterStudent.find(temp)->key.get_advisor());
+	}
+}
+
+
