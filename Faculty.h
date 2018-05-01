@@ -8,6 +8,8 @@
 #include <cmath>
 #include <cstdlib>
 
+#include <vector>
+
 #include "Person.h"
 
 #include "BST.h"
@@ -27,22 +29,16 @@ public:
 	Faculty(int new_ID);
 	~Faculty();
 
-	void make_advisee_string(tree_node<int> *node);
-	string get_advisees();
 	void add_advisee(int new_advisee);
-	void remove_advisee(int remove_this);
-
-	BST<int> get_advisees_tree();
+	vector<int> get_advisees();
 
 
 	friend ostream& operator<<(ostream& os, Faculty& f);
 
-	string all_the_advisees;
 
 private:
 
-
-	BST<int> advisees;
+	vector<int> advisees;
 
 };
 

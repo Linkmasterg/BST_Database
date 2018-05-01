@@ -89,6 +89,10 @@ void SimulateDatabase::Run()
 		{
 			case_5();
 		}
+		else if (user_input_int == 6)
+		{
+			case_6();
+		}
 
 
 		else if (user_input_int == 7)
@@ -129,6 +133,20 @@ void SimulateDatabase::case_3()
 	cin >> user_input_int;
 
 	Student temp = Student(user_input_int);
+
+	if (masterStudent.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	else
+	{
+		cout << endl << masterStudent.find(temp)->key << endl;
+	}
+}
+
+void SimulateDatabase::case_3_with_ID(int student_ID)
+{
+	Student temp = Student(student_ID);
 
 	if (masterStudent.find(temp)->key.get_ID() == -1)
 	{
@@ -186,6 +204,28 @@ void SimulateDatabase::case_5()
 	{
 		case_4_with_ID(masterStudent.find(temp)->key.get_advisor());
 	}
+}
+
+void SimulateDatabase::case_6()
+{
+	cout << "Please enter the faculty's ID # to display ALL their advisees' information: ";
+	cin >> user_input_int;
+
+	Faculty temp = Faculty(user_input_int);
+
+	if (masterFaculty.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	else		
+	{
+		for (int i = 0; i < masterFaculty.find(temp)->key.get_advisees().size(); ++i)
+		{
+			case_3_with_ID(masterFaculty.find(temp)->key.get_advisees()[i]);
+		}
+	}
+
+
 }
 
 void SimulateDatabase::case_7()
