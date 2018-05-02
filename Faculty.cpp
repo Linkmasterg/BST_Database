@@ -27,6 +27,14 @@ using namespace std;
 		set_ID(new_ID);
 	}
 
+	Faculty::Faculty(string new_name, int new_ID, string new_level, string new_department)
+	{
+		set_name(new_name);
+		set_ID(new_ID);
+		set_level(new_level);
+		set_subject(new_department);
+	}
+
 	Faculty::~Faculty()
 	{
 

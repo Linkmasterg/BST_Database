@@ -35,9 +35,6 @@ void SimulateDatabase::Run()
 	{
 		masterStudent.insert(Student());
 		masterFaculty.insert(Faculty());
-
-		masterStudent.print_tree(masterStudent.get_root());
-		cout << "----------------------" << endl;
 	}
 
 
@@ -50,7 +47,8 @@ void SimulateDatabase::Run()
 	while (!exit_now)
 	{
 
-		cout << "What would you like to do?" << endl <<
+		cout << endl << 
+				"What would you like to do?" << endl <<
 				"[1] Print all students and their information" << endl <<
 				"[2] Print all faculty and their information" << endl <<
 				"[3] Find and display student information given the students id" << endl <<
@@ -103,6 +101,10 @@ void SimulateDatabase::Run()
 		else if (user_input_int == 8)
 		{
 			case_8();
+		}
+		else if (user_input_int == 9)
+		{
+			case_9();
 		}
 
 
@@ -316,4 +318,80 @@ void SimulateDatabase::case_8()
 }
 
 
+void SimulateDatabase::case_9()
+{
+
+	string new_name = "";
+	int new_ID = -1;
+	string new_level = "";
+	string new_department = "";
+	int new_advisee = -1;
+
+	bool duplicates = true;
+
+	cout << "Please enter the following info to add a new faculty..." << endl;
+	cout << "Faculty Name: ";
+	cin >> ws;
+	getline(cin, new_name);
+
+	while (duplicates)
+	{
+		cout << "Faculty ID # [5001 - 10000]: ";
+		cin >> new_ID;
+
+		Faculty temp = Faculty(new_ID);
+
+		if (masterFaculty.contains(temp))
+		{
+			cout << "That faculty ID # is already in use." << endl;
+		}
+
+		if (!masterFaculty.contains(temp))
+		{
+			duplicates = false;
+		}
+	}
+
+	cout << "Faculty level [Professor, Assistant Professor, TA, etc...]: ";
+	cin >> ws;
+	getline(cin, new_level);
+
+	cout << "Faculty Department: ";
+	cin >> ws;
+	getline(cin, new_department);
+
+	bool not_finished = true;
+	vector<int> new_advisees;
+
+	while (not_finished)
+	{
+		cout << "Faculty advisee(s) [Enter existing Student of ID # 1 - 5000]" << endl;
+		cout << "[enter 0 to finish]: ";
+		cin >> new_advisee;
+
+		if (new_advisee == 0)
+		{
+			not_finished = false;
+		}
+
+		else
+		{
+			new_advisees.push_back(new_advisee);
+		}
+	}
+
+	Faculty new_faculty = Faculty(new_name, new_ID, new_level, new_department);
+	masterFaculty.insert(new_faculty);
+
+	for (int i = 0; i < new_advisees.size(); ++i)
+	{
+		masterFaculty.find(new_ID)->key.add_advisee(new_advisees[i]);
+	}
+}
+
+void SimulateDatabase::case_10()
+{
+
+	
+}
 

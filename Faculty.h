@@ -27,6 +27,7 @@ public:
 
 	Faculty();
 	Faculty(int new_ID);
+	Faculty(string new_name, int new_ID, string new_level, string new_department);
 	~Faculty();
 
 	void add_advisee(int new_advisee);
