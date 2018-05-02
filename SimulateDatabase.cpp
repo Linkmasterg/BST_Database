@@ -106,6 +106,10 @@ void SimulateDatabase::Run()
 		{
 			case_9();
 		}
+		else if (user_input_int == 10)
+		{
+			case_10();
+		}
 
 
 
@@ -306,6 +310,13 @@ void SimulateDatabase::case_8()
 	cout << "Please enter the student's ID # to delete them from the database: ";
 	cin >> student_ID;
 
+	while (!masterStudent.contains(masterStudent.find(student_ID)->key))
+	{
+		cout << "The database does not contain a student under that ID #. Please try again:";
+		cin >> ws;
+		cin >> student_ID;
+	}
+
 	faculty_ID = case_5_with_student_ID(student_ID);
 	Faculty temp_f = Faculty(faculty_ID);
 
@@ -392,6 +403,42 @@ void SimulateDatabase::case_9()
 void SimulateDatabase::case_10()
 {
 
+
+	int faculty_ID;
+
+	vector<int> students_to_reassign;
+
+
+	cout << "Please enter the faculty's ID # to delete them from the database: ";
+	cin >> faculty_ID;
+
+	while (!masterFaculty.contains(masterFaculty.find(faculty_ID)->key))
+	{
+		cout << "The database does not contain a faculty member under that ID #. Please try again:";
+		cin >> ws;
+		cin >> faculty_ID;
+	}
+
+	students_to_reassign = masterFaculty.find(faculty_ID)->key.get_advisees();
+	masterFaculty.delete_node(masterFaculty.find(faculty_ID)->key);
+
+	if (students_to_reassign.size() != 0)
+	{
+		cout << "With faculty member deleted, you must reassign " << students_to_reassign.size() << " students" << endl;
+	}
+
+	for (int i = 0; i < students_to_reassign.size(); ++i)
+	{
+		cout << "Enter existing Faculty ID # for student ID #" << students_to_reassign[i] << ": ";
+		cin >> faculty_ID;
+		masterStudent.find(students_to_reassign[i])->key.set_advisor(faculty_ID);
+		masterFaculty.find(faculty_ID)->key.add_advisee(students_to_reassign[i]);
+	}
+}
+
+
+void SimulateDatabase::case_11()
+{
 	
 }
 
