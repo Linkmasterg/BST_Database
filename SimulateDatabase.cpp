@@ -439,6 +439,13 @@ void SimulateDatabase::case_10()
 
 void SimulateDatabase::case_11()
 {
-	
+
 }
+
+// TODO: file I/O, Rollback (stack of 2x BST), comments, READ_ME, Makefile, *polish*
+
+
+
+
+
 

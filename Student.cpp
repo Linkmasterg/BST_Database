@@ -21,7 +21,6 @@ Student::Student()
 
 }
 
-
 Student::Student(int new_ID)
 {
 	set_name("Dr. Null");
@@ -55,10 +54,6 @@ void Student::print_info()
 
 }
 
-
-
-
-
 double Student::get_GPA()
 {
 	return GPA;
@@ -78,7 +73,6 @@ void Student::set_advisor(int new_advisor)
 {
 	advisor = new_advisor;
 }
-
 
 ostream& operator<<(ostream& os, Student& s) 
 {  
