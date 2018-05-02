@@ -35,6 +35,9 @@ void SimulateDatabase::Run()
 	{
 		masterStudent.insert(Student());
 		masterFaculty.insert(Faculty());
+
+		masterStudent.print_tree(masterStudent.get_root());
+		cout << "----------------------" << endl;
 	}
 
 

@@ -297,7 +297,7 @@ bool BST<T>::delete_node(T k)
 
 		else 
 		{
-			parent->right = current->right;
+			parent->right = current->left;
 		}
 	}
 
