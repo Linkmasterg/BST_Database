@@ -30,7 +30,10 @@ public:
 	~Faculty();
 
 	void add_advisee(int new_advisee);
+	void remove_advisee(int rm_advisee);
 	vector<int> get_advisees();
+
+
 
 
 	friend ostream& operator<<(ostream& os, Faculty& f);

@@ -38,6 +38,17 @@ using namespace std;
 		advisees.push_back(new_advisee);
 	}
 
+	void Faculty::remove_advisee(int rm_advisee)
+	{
+		for (int i = 0; i < get_advisees().size(); ++i)
+		{
+			if (get_advisees()[i] == rm_advisee)
+			{
+				advisees.erase(advisees.begin() + i);
+			}
+		}
+	}
+
 	vector<int> Faculty::get_advisees()  
 	{
 		return advisees;
@@ -65,3 +76,7 @@ using namespace std;
 		os << endl;
 		return os;
 	}
+
+
+
+

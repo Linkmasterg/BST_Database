@@ -2,8 +2,10 @@
 #include <fstream>
 #include <cmath>
 #include <cstdlib>
+#include <vector>
 
 #include "BST.h"
+
 
 using namespace std;
 
@@ -373,5 +375,6 @@ tree_node<T>* BST<T>::get_successor(tree_node<T> *d) // d represents the node th
 
 	return successor;
 }
+
 
 

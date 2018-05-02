@@ -93,11 +93,13 @@ void SimulateDatabase::Run()
 		{
 			case_6();
 		}
-
-
 		else if (user_input_int == 7)
 		{
 			case_7();
+		}
+		else if (user_input_int == 8)
+		{
+			case_8();
 		}
 
 
@@ -144,7 +146,7 @@ void SimulateDatabase::case_3()
 	}
 }
 
-void SimulateDatabase::case_3_with_ID(int student_ID)
+void SimulateDatabase::case_3_with_student_ID(int student_ID)
 {
 	Student temp = Student(student_ID);
 
@@ -175,7 +177,7 @@ void SimulateDatabase::case_4()
 	}
 }
 
-void SimulateDatabase::case_4_with_ID(int faculty_ID)
+void SimulateDatabase::case_4_with_faculty_ID(int faculty_ID)
 {
 	Faculty temp = Faculty(faculty_ID);
 
@@ -202,8 +204,20 @@ void SimulateDatabase::case_5()
 	}
 	else		
 	{
-		case_4_with_ID(masterStudent.find(temp)->key.get_advisor());
+		case_4_with_faculty_ID(masterStudent.find(temp)->key.get_advisor());
 	}
+}
+
+int SimulateDatabase::case_5_with_student_ID(int student_ID)
+{
+	Student temp = Student(student_ID);
+
+	if (masterStudent.find(temp)->key.get_ID() == -1)
+	{
+		cout << endl;
+	}
+	
+	return masterStudent.find(temp)->key.get_advisor();
 }
 
 void SimulateDatabase::case_6()
@@ -221,7 +235,7 @@ void SimulateDatabase::case_6()
 	{
 		for (int i = 0; i < masterFaculty.find(temp)->key.get_advisees().size(); ++i)
 		{
-			case_3_with_ID(masterFaculty.find(temp)->key.get_advisees()[i]);
+			case_3_with_student_ID(masterFaculty.find(temp)->key.get_advisees()[i]);
 		}
 	}
 
@@ -277,4 +291,26 @@ void SimulateDatabase::case_7()
 
 	masterStudent.insert(Student(new_name, new_ID, new_level, new_major, new_GPA, new_advisor));
 }
+
+
+void SimulateDatabase::case_8()
+{
+	int student_ID;
+	int faculty_ID;
+
+	cout << "Please enter the student's ID # to delete them from the database: ";
+	cin >> student_ID;
+
+	faculty_ID = case_5_with_student_ID(student_ID);
+	Faculty temp_f = Faculty(faculty_ID);
+
+	masterFaculty.find(temp_f)->key.remove_advisee(student_ID);
+
+
+
+	Student temp_s = Student(student_ID);
+	masterStudent.delete_node(temp_s);
+}
+
+
 

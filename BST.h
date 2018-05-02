@@ -11,6 +11,7 @@
 #include "tree_node.cpp"
 
 
+
 using namespace std;
 
 
@@ -42,7 +43,6 @@ public:
 
 	tree_node<T>* get_successor(tree_node<T> *d);
 
-	
 
 
 private:
