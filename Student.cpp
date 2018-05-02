@@ -37,6 +37,8 @@ Student::Student(string new_name, int new_ID, string new_level, string new_major
 	set_advisor(new_advisor);
 }
 
+
+
 Student::~Student() 
 {
 

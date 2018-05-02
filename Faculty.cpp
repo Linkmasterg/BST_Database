@@ -35,6 +35,19 @@ using namespace std;
 		set_subject(new_department);
 	}
 
+	Faculty::Faculty(string new_name, int new_ID, string new_level, string new_department, vector<int> new_advisees)
+	{
+		set_name(new_name);
+		set_ID(new_ID);
+		set_level(new_level);
+		set_subject(new_department);
+
+		for (int i = 0; i < new_advisees.size(); ++i)
+		{
+			add_advisee(new_advisees[i]);
+		}
+	}
+
 	Faculty::~Faculty()
 	{
 

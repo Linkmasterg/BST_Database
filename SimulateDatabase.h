@@ -22,6 +22,10 @@ public:
 
 	void Run();
 
+	bool does_file_exist(string file_name);
+	void read_files();
+	void write_files();
+
 	void case_1();
 	void case_2();
 	void case_3();

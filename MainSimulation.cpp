@@ -18,5 +18,4 @@ int main(int argc, char** argv)
 	SimulateDatabase theSimulation = SimulateDatabase();
 	theSimulation.Run();
 
-	cout << "ayo" << endl;
 }

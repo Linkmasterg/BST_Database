@@ -4,6 +4,9 @@
 #include <fstream>
 #include <cmath>
 #include <cstdlib>
+#include <sstream>
+
+
 
 #include "BST.h"
 #include "BST.cpp"
@@ -31,11 +34,7 @@ SimulateDatabase::~SimulateDatabase()
 void SimulateDatabase::Run()
 {
 
-	for (int i = 0; i < 5; ++i)
-	{
-		masterStudent.insert(Student());
-		masterFaculty.insert(Faculty());
-	}
+	read_files();
 
 
 	exit_now = false;
@@ -118,10 +117,11 @@ void SimulateDatabase::Run()
 			exit_now = true;
 		}
 
+		
 
-	}
+	} // END OF while loop. Database modification complete. Exit called.
 
-
+	write_files();
 }
 
 
@@ -445,6 +445,177 @@ void SimulateDatabase::case_11()
 // TODO: file I/O, Rollback (stack of 2x BST), comments, READ_ME, Makefile, *polish*
 
 
+
+void SimulateDatabase::read_files()
+{
+	string file_line = "";
+
+	// Create or Read studentTable
+	if (!does_file_exist("studentTable"))
+	{
+		ofstream new_studentTable;
+		new_studentTable.open("studentTable");
+		new_studentTable.close();
+	}
+
+	else
+	{
+		ifstream read_studentTable("studentTable");
+
+		if (read_studentTable.is_open())
+		{
+			bool keep_reading = true;
+
+			string new_name;
+			int new_ID;
+			string new_level;
+			string new_major;
+			double new_GPA;
+			int new_advisor;
+
+			while (keep_reading) // = name, id, level, major, gpa, advisor
+			{
+
+
+				getline(read_studentTable, file_line);
+				file_line.erase(0, 14);
+				new_name = file_line;
+
+				if (new_name == "")
+				{
+					break;
+				}
+
+				getline(read_studentTable, file_line);
+				file_line.erase(0, 6);
+				new_ID = stoi(file_line);
+
+				getline(read_studentTable, file_line);
+				file_line.erase(0, 7);
+				new_level = file_line;
+
+				getline(read_studentTable, file_line);
+				file_line.erase(0, 7);
+				new_major = file_line;
+
+				getline(read_studentTable, file_line);
+				file_line.erase(0, 5);
+				new_GPA = stod(file_line);
+
+				getline(read_studentTable, file_line);
+				file_line.erase(0, 14);
+				new_advisor = stoi(file_line);
+
+
+				masterStudent.insert(Student(new_name, new_ID, new_level, new_major, new_GPA, new_advisor));
+
+
+				if (!getline(read_studentTable, file_line))
+				{
+					keep_reading = false;
+				}
+			}
+
+			read_studentTable.close();
+		}
+	}
+
+	// Create or Read facultyTable
+	if (!does_file_exist("facultyTable"))
+	{
+		ofstream new_facultyTable;
+		new_facultyTable.open("facultyTable");
+		new_facultyTable.close();
+	}
+
+	else
+	{
+		ifstream read_facultyTable("facultyTable");
+
+		if (read_facultyTable.is_open())
+		{
+			bool keep_reading = true;
+
+			string new_name;
+			int new_ID;
+			string new_level;
+			string new_department;
+
+			vector<int> new_advisees_int;
+
+			while (keep_reading) // = name, ID, level, department, advisees [...]
+			{
+
+				getline(read_facultyTable, file_line);
+				file_line.erase(0, 14);
+				new_name = file_line;
+
+				if (new_name == "")
+				{
+					break;
+				}
+
+				getline(read_facultyTable, file_line);
+				file_line.erase(0, 6);
+				new_ID = stoi(file_line);
+
+				getline(read_facultyTable, file_line);
+				file_line.erase(0, 7);
+				new_level = file_line;
+
+				getline(read_facultyTable, file_line);
+				file_line.erase(0, 12);
+				new_department = file_line;
+
+				getline(read_facultyTable, file_line);
+				file_line.erase(0, 10);
+
+
+				new_advisees_int.clear();
+
+
+				stringstream ss(file_line);
+				istream_iterator<string> begin(ss);
+				istream_iterator<string> end;
+				vector<string> new_advisees_string(begin, end);
+
+				for (int i = 0; i < new_advisees_string.size(); ++i)
+				{
+					new_advisees_int.push_back(stoi(new_advisees_string[i]));
+				}
+
+
+				masterFaculty.insert(Faculty(new_name, new_ID, new_level, new_department, new_advisees_int));
+
+				if (!getline(read_facultyTable, file_line))
+				{
+					keep_reading = false;
+				}
+			}
+
+			read_facultyTable.close();
+		}
+	}
+}
+
+
+bool SimulateDatabase::does_file_exist(string file_name)
+{
+	ifstream infile(file_name);
+	return infile.good();
+}
+
+
+void SimulateDatabase::write_files()
+{
+
+    freopen("studentTable", "w", stdout);
+    masterStudent.print_tree(masterStudent.get_root());
+
+
+    freopen("facultyTable", "w", stdout);
+    masterFaculty.print_tree(masterFaculty.get_root());
+}
 
 
 
