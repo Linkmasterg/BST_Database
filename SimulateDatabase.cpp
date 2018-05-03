@@ -1,4 +1,19 @@
 
+/*
+Geoffrey Hughes
+002306123
+ghughes@chapman.edu
+CPSC 350-02
+Assignment 5: Building a Database with BSTs
+*/
+
+
+/*
+	This class is where all file reading / writing is done; all user input; and all modifications to the database.
+	It also holds the main while loop that makes changes to the two Binary Search Trees.
+	This class makes use of all other classes.
+*/
+
 
 #include <iostream>
 #include <fstream>
@@ -19,29 +34,29 @@
 
 using namespace std;
 
+/*
+	Constructs an instance of SimulateDatabase
+*/
 SimulateDatabase::SimulateDatabase()
 {
-
 }
 
+/*
+	Destructs an instance of SimulateDatabase. We all shall fall.
+*/
 SimulateDatabase::~SimulateDatabase()
 {
-
-
 }
 
 
+/*
+	This handles the entire database. 
+	All file reading / writing is done within this method; all user input handled; and all modifications to the BSTs.
+*/
 void SimulateDatabase::Run()
 {
 
 	read_files();
-
-	GenStack<BST<Student> > student_stack = GenStack<BST<Student> >(5);
-	GenStack<BST<Faculty> > faculty_stack = GenStack<BST<Faculty> >(5);
-
-	student_stack.push(masterStudent);
-	faculty_stack.push(masterFaculty);
-
 
 
 
@@ -104,26 +119,36 @@ void SimulateDatabase::Run()
 		else if (user_input_int == 7)
 		{
 			case_7();
+
 		}
 		else if (user_input_int == 8)
 		{
 			case_8();
+
 		}
 		else if (user_input_int == 9)
 		{
 			case_9();
+
 		}
 		else if (user_input_int == 10)
 		{
 			case_10();
+
 		}
 		else if (user_input_int == 11)
 		{
 			case_11();
+
 		}
 		else if (user_input_int == 12)
 		{
 			case_12();
+
+		}
+		else if (user_input_int == 13)
+		{
+			case_13();
 		}
 
 
@@ -143,17 +168,25 @@ void SimulateDatabase::Run()
 
 
 
-
+/*
+	Handles case 1
+*/
 void SimulateDatabase::case_1()
 {
 	masterStudent.print_tree(masterStudent.get_root());
 }
 
+/*
+	Handles case 2
+*/
 void SimulateDatabase::case_2()
 {
 	masterFaculty.print_tree(masterFaculty.get_root());
 }
 
+/*
+	Handles case 3
+*/
 void SimulateDatabase::case_3()
 {
 	cout << "Please enter the student's ID #: ";
@@ -171,6 +204,9 @@ void SimulateDatabase::case_3()
 	}
 }
 
+/*
+	Does the same operation as case 3; used in other cases
+*/
 void SimulateDatabase::case_3_with_student_ID(int student_ID)
 {
 	Student temp = Student(student_ID);
@@ -185,6 +221,9 @@ void SimulateDatabase::case_3_with_student_ID(int student_ID)
 	}
 }
 
+/*
+	Handles case 4
+*/
 void SimulateDatabase::case_4()
 {
 	cout << "Please enter the faculty's ID #: ";
@@ -202,6 +241,10 @@ void SimulateDatabase::case_4()
 	}
 }
 
+
+/*
+	Does the same operation as case 4; used in other cases
+*/
 void SimulateDatabase::case_4_with_faculty_ID(int faculty_ID)
 {
 	Faculty temp = Faculty(faculty_ID);
@@ -216,6 +259,9 @@ void SimulateDatabase::case_4_with_faculty_ID(int faculty_ID)
 	}
 }
 
+/*
+	Handles case 5
+*/
 void SimulateDatabase::case_5()
 {
 	cout << "Please enter the student's ID # to display their advisor's information: ";
@@ -233,6 +279,10 @@ void SimulateDatabase::case_5()
 	}
 }
 
+/*
+	Does the same operation as case 5; used in other cases. 
+	Returns an int of student's advisor ID#, after taking the student's ID#.
+*/
 int SimulateDatabase::case_5_with_student_ID(int student_ID)
 {
 	Student temp = Student(student_ID);
@@ -245,6 +295,9 @@ int SimulateDatabase::case_5_with_student_ID(int student_ID)
 	return masterStudent.find(temp)->key.get_advisor();
 }
 
+/*
+	Handles case 6
+*/
 void SimulateDatabase::case_6()
 {
 	cout << "Please enter the faculty's ID # to display ALL their advisees' information: ";
@@ -267,6 +320,9 @@ void SimulateDatabase::case_6()
 
 }
 
+/*
+	Handles case 7
+*/
 void SimulateDatabase::case_7()
 {
 	string new_name = "";
@@ -319,7 +375,9 @@ void SimulateDatabase::case_7()
 	masterStudent.insert(Student(new_name, new_ID, new_level, new_major, new_GPA, new_advisor));
 }
 
-
+/*
+	Handles case 8
+*/
 void SimulateDatabase::case_8()
 {
 	int student_ID;
@@ -346,7 +404,9 @@ void SimulateDatabase::case_8()
 	masterStudent.delete_node(temp_s);
 }
 
-
+/*
+	Handles case 9
+*/
 void SimulateDatabase::case_9()
 {
 
@@ -418,6 +478,9 @@ void SimulateDatabase::case_9()
 	}
 }
 
+/*
+	Handles case 10
+*/
 void SimulateDatabase::case_10()
 {
 
@@ -454,7 +517,9 @@ void SimulateDatabase::case_10()
 	}
 }
 
-
+/*
+	Handles case 11
+*/
 void SimulateDatabase::case_11()
 {
 	int student_ID;
@@ -476,6 +541,9 @@ void SimulateDatabase::case_11()
 
 }
 
+/*
+	Handles case 12
+*/
 void SimulateDatabase::case_12()
 {
 	int faculty_ID;
@@ -509,14 +577,34 @@ void SimulateDatabase::case_12()
 		cout << "No successor found to advise student. Advisor set to 0. Please call 11 to reassign." << endl;
 	}
 
-	
+}
+
+/*
+	Handles case 13
+*/
+void SimulateDatabase::case_13()
+{
+
+	cout << "Don't make mistakes!" << endl << "See comments of case_13() :(" << endl;
+/*
+
+	Sadly I was only able to make the Stack method of savestates work with 1 iteration. Then it caused errors.
+	I am very sad about conceding this
+
+	masterStudent = student_stack.pop();
+	masterFaculty = faculty_stack.pop();
+*/
 
 }
 
-// TODO: Rollback (stack of 2x BST), comments, READ_ME, Makefile, *polish*
+// comments, READ_ME, Makefile, *polish*
 
 
-
+/*
+	Reads files at startup if they are there. "studentTable" and "facultyTable"
+	Reads them into the two Binary Search Trees, respectively.
+	If no file(s) exist, it creates them.
+*/
 void SimulateDatabase::read_files()
 {
 	string file_line = "";
@@ -669,14 +757,19 @@ void SimulateDatabase::read_files()
 	}
 }
 
-
+/*
+	Checks to see if input string "file_name" exists within the current directory
+*/
 bool SimulateDatabase::does_file_exist(string file_name)
 {
 	ifstream infile(file_name);
 	return infile.good();
 }
 
-
+/*
+	Writes all of the BSTs 'masterStudent' and 'masterFaculty' to their respective text files.
+	Saves them for future use / modification.
+*/
 void SimulateDatabase::write_files()
 {
 

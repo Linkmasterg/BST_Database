@@ -42,12 +42,21 @@ public:
 	void case_10();
 	void case_11();
 	void case_12();
-
+	void case_13();
 	void case_14();
+
+
+
+	//GenStack<BST<Student> > student_stack;
+	//GenStack<BST<Faculty> > faculty_stack;
 
 
 	BST<Student> masterStudent;
 	BST<Faculty> masterFaculty;
+
+	BST<Person> masterDuo [2];
+
+
 
 	bool exit_now;
 	int user_input_int;

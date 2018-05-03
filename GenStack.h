@@ -3,13 +3,6 @@
 #define GENSTACK_H
 
 
-/*
-Geoffrey Hughes
-002306123
-ghughes@chapman.edu
-CPSC 350-02
-Assignment 3: Syntax Checker
-*/
 
 
 #include <iostream>

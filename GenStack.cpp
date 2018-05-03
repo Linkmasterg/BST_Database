@@ -4,7 +4,7 @@ Geoffrey Hughes
 002306123
 ghughes@chapman.edu
 CPSC 350-02
-Assignment 3: Syntax Checker
+Assignment 5: Building a Database with BSTs
 */
 
 

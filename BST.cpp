@@ -1,3 +1,17 @@
+
+/*
+Geoffrey Hughes
+002306123
+ghughes@chapman.edu
+CPSC 350-02
+Assignment 5: Building a Database with BSTs
+*/
+
+
+/*
+	This class manages makes use of the tree_node class to properly construct a Binary Search Tree of any type T.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -6,13 +20,12 @@
 
 #include "BST.h"
 
-
 using namespace std;
 
 
-// Binary Search Tree
-
-
+/*
+	BST Constructor
+*/
 template <class T>
 BST<T>::BST()
 {
@@ -20,6 +33,9 @@ BST<T>::BST()
 }
 
 
+/*
+	BST Destructor
+*/
 template <class T>
 BST<T>::~BST()
 {
@@ -29,6 +45,10 @@ BST<T>::~BST()
 }
 
 
+/*
+	Getter for the BST root leaf node.
+	Returns the root as a leaf node (pointer).
+*/
 template <class T>
 tree_node<T>* BST<T>::get_root()
 {
@@ -36,6 +56,10 @@ tree_node<T>* BST<T>::get_root()
 }
 
 
+/*
+	Prints the entire BST, from leftmost (least) node to rightmost (greatest)
+	Lesser and greater are defined by comarison operators, overloaded or not.
+*/
 template <class T>
 void BST<T>::print_tree(tree_node<T> *node) // In-order traversal
 {
@@ -50,6 +74,9 @@ void BST<T>::print_tree(tree_node<T> *node) // In-order traversal
 }
 
 
+/*
+	Returns the leftmost tree_node. (Least)
+*/
 template <class T>
 tree_node<T>* BST<T>::get_min()
 {
@@ -70,6 +97,9 @@ tree_node<T>* BST<T>::get_min()
 }
 
 
+/*
+	Returns the rightmost tree_node. (Greatest)
+*/
 template <class T>
 tree_node<T>* BST<T>::get_max()
 {
@@ -89,9 +119,12 @@ tree_node<T>* BST<T>::get_max()
 	return curr;
 }
 
-// get_min is the same, but curr = curr->left
 
 
+/*
+	Inserts data of type k into the BST. Finds the correct spot to insert following sorted BST guidelines.
+	Uses (overloaded) comparison operators.
+*/
 template <class T>
 void BST<T>::insert(T k)
 {
@@ -142,6 +175,9 @@ void BST<T>::insert(T k)
 }
 
 
+/*
+	Finds tree_node that holds data which equals k, and returns that tree_node.
+*/
 template <class T>
 tree_node<T>* BST<T>::find(T k)
 {
@@ -182,6 +218,9 @@ tree_node<T>* BST<T>::find(T k)
 }
 
 
+/*
+	Returns true or false; whether the tree contains data k, or not.
+*/
 template <class T>
 bool BST<T>::contains(T k)
 {
@@ -217,6 +256,10 @@ bool BST<T>::contains(T k)
 }
 
 
+/*
+	Returns true or false; whether the tree_node with data = k was found and deleted.
+	Properly rearranges the BST tree_nodes after deletion.
+*/
 template <class T>
 bool BST<T>::delete_node(T k)
 {
@@ -349,6 +392,10 @@ bool BST<T>::delete_node(T k)
 }
 
 
+/*
+	Used by delete_node to find an appropriate successor to the deleted node. Takes the deleted node as input.
+	Also used to find an appropriate successor for a student's advisor in SimulateData.
+*/
 template <class T>
 tree_node<T>* BST<T>::get_successor(tree_node<T> *d) // d represents the node that we are going to delete
 {

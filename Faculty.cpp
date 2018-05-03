@@ -1,4 +1,17 @@
 
+/*
+Geoffrey Hughes
+002306123
+ghughes@chapman.edu
+CPSC 350-02
+Assignment 5: Building a Database with BSTs
+*/
+
+
+/*
+	This class constructs the Faculty. It holds all member variables and functions required to properly manage a BST of faculty.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -12,6 +25,9 @@
 
 using namespace std;
 
+/*
+	Faculty constructor for testing
+*/
 	Faculty::Faculty()
 	{
 		set_name("DR. NULL");
@@ -22,11 +38,19 @@ using namespace std;
 		add_advisee(3609);
 	}
 
+
+/*
+	Faculty constructor for testing. Also used in methods to find Faculty of a given ID #.
+	Taken here as input 'new_ID'
+*/
 	Faculty::Faculty(int new_ID)
 	{
 		set_ID(new_ID);
 	}
 
+/*
+	Faculty constructor for creating new Faculty in the database, given all basic inputs.
+*/
 	Faculty::Faculty(string new_name, int new_ID, string new_level, string new_department)
 	{
 		set_name(new_name);
@@ -35,6 +59,10 @@ using namespace std;
 		set_subject(new_department);
 	}
 
+/*
+	Faculty constructor for creating new Faculty in the database, given all basic inputs, plus the addition of all advisees.
+	This is accomplished using a vector of ints to store new_advisees any copy it to the Faculty member variable.
+*/
 	Faculty::Faculty(string new_name, int new_ID, string new_level, string new_department, vector<int> new_advisees)
 	{
 		set_name(new_name);
@@ -48,17 +76,27 @@ using namespace std;
 		}
 	}
 
+/*
+	Faculty destructor. Shall you never fall Rene.
+*/
 	Faculty::~Faculty()
 	{
 
 	}
 
-
+/*
+	Used to add advisees to the advisee vector of ints holding Student ID #s.
+	Takes the new advisee ID# as input.
+*/
 	void Faculty::add_advisee(int new_advisee)  
 	{
 		advisees.push_back(new_advisee);
 	}
 
+/*
+	Used to remove advisees from the advisee vector class member variable.
+	Takes the advisee ID# as input that we want to delete.
+*/
 	void Faculty::remove_advisee(int rm_advisee)
 	{
 		for (int i = 0; i < get_advisees().size(); ++i)
@@ -70,6 +108,9 @@ using namespace std;
 		}
 	}
 
+/*
+	Returns the private member variable containing all advisees.
+*/
 	vector<int> Faculty::get_advisees()  
 	{
 		return advisees;
@@ -79,7 +120,9 @@ using namespace std;
 
 
 
-
+/*
+	When streaming out a Faculty object, this is the correct way to print it, with all member variables labeled.
+*/
 	ostream& operator<<(ostream& os, Faculty& f)
 	{
 
