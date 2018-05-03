@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <sstream>
 
-
+#include "GenStack.cpp"
 
 #include "BST.h"
 #include "BST.cpp"
@@ -35,6 +35,14 @@ void SimulateDatabase::Run()
 {
 
 	read_files();
+
+	GenStack<BST<Student> > student_stack = GenStack<BST<Student> >(5);
+	GenStack<BST<Faculty> > faculty_stack = GenStack<BST<Faculty> >(5);
+
+	student_stack.push(masterStudent);
+	faculty_stack.push(masterFaculty);
+
+
 
 
 	exit_now = false;
@@ -108,6 +116,14 @@ void SimulateDatabase::Run()
 		else if (user_input_int == 10)
 		{
 			case_10();
+		}
+		else if (user_input_int == 11)
+		{
+			case_11();
+		}
+		else if (user_input_int == 12)
+		{
+			case_12();
 		}
 
 
@@ -298,6 +314,8 @@ void SimulateDatabase::case_7()
 	cout << "Advisor ID #: ";
 	cin >> new_advisor;
 
+	masterFaculty.find(new_advisor)->key.add_advisee(new_ID);
+
 	masterStudent.insert(Student(new_name, new_ID, new_level, new_major, new_GPA, new_advisor));
 }
 
@@ -439,10 +457,63 @@ void SimulateDatabase::case_10()
 
 void SimulateDatabase::case_11()
 {
+	int student_ID;
+	int new_advisor_ID;
+
+	cout << "Please enter the student's ID #: ";
+	cin >> student_ID;
+
+	cout << "Now enter the new advisor ID # you wish to change to: ";
+	cin >> new_advisor_ID;
+
+	if (masterFaculty.contains(masterStudent.find(student_ID)->key.get_advisor()))
+	{
+		masterFaculty.find(masterStudent.find(student_ID)->key.get_advisor())->key.remove_advisee(student_ID);
+	}
+
+	masterFaculty.find(new_advisor_ID)->key.add_advisee(student_ID);
+	masterStudent.find(student_ID)->key.set_advisor(new_advisor_ID);
 
 }
 
-// TODO: file I/O, Rollback (stack of 2x BST), comments, READ_ME, Makefile, *polish*
+void SimulateDatabase::case_12()
+{
+	int faculty_ID;
+	int advisee_ID;
+
+	int faculty_successor;
+
+	cout << "Please enter the faculty ID # from which you would like to remove an advisee: ";
+	cin >> faculty_ID;
+
+	cout << "Now choose which advisee to remove: ";
+	for (int i = 0; i < masterFaculty.find(faculty_ID)->key.get_advisees().size(); ++i)
+	{
+		cout << masterFaculty.find(faculty_ID)->key.get_advisees()[i] << " "; 
+	}
+
+	cin >> advisee_ID;
+
+	masterFaculty.find(faculty_ID)->key.remove_advisee(advisee_ID);
+	faculty_successor = masterFaculty.get_successor(masterFaculty.find(faculty_ID))->key.get_ID();
+
+	if (faculty_successor != faculty_ID)
+	{
+		masterStudent.find(advisee_ID)->key.set_advisor(faculty_successor);
+		masterFaculty.find(faculty_successor)->key.add_advisee(advisee_ID);
+	}
+	
+	else
+	{
+		masterStudent.find(advisee_ID)->key.set_advisor(0);
+		cout << "No successor found to advise student. Advisor set to 0. Please call 11 to reassign." << endl;
+	}
+
+	
+
+}
+
+// TODO: Rollback (stack of 2x BST), comments, READ_ME, Makefile, *polish*
 
 
 

@@ -5,6 +5,7 @@
 #include <cstdlib>
 
 #include "BST.h"
+#include "GenStack.h"
 
 #include "Person.h"
 #include "Student.h"
@@ -40,10 +41,9 @@ public:
 	void case_9();
 	void case_10();
 	void case_11();
+	void case_12();
 
 	void case_14();
-
-
 
 
 	BST<Student> masterStudent;
